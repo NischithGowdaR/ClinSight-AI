@@ -15,8 +15,8 @@ ClinSight AI addresses the critical gap in hospital workflows where physicians s
 
 ## Tech Stack
 
-- **Frontend**: React 19 + Next.js 16 + Vite + Tailwind CSS
-- **Backend**: Node.js/Express (integrated into Next.js)
+- **Frontend**: React 19 + Next.js 16 + Tailwind CSS
+- **Backend**: Node.js + Express + TypeScript
 - **Data**: Synthetic patient records (no external DB for MVP)
 - **AI Integration**: Groq (simulated for demo)
 - **State Management**: React hooks + SWR-ready
@@ -25,23 +25,43 @@ ClinSight AI addresses the critical gap in hospital workflows where physicians s
 ## Project Structure
 
 ```
-/vercel/share/v0-project/
-├── app/
-│   ├── page.tsx                    # Landing page (mode selector)
-│   ├── doctor/
-│   │   └── page.tsx                # Doctor Dashboard
-│   └── patient/
-│       └── page.tsx                # Patient Portal
-├── components/
-│   └── doctor/
-│       ├── PatientSearch.tsx       # Search interface
-│       └── PreConsultationBrief.tsx # Brief component with tabs
-├── lib/
-│   ├── syntheticData.ts           # Patient records + database
-│   ├── drugInteractions.ts         # Drug interaction engine
-│   └── utils.ts                    # Helpers
-└── public/
-    └── (assets)
+clin-sight-ai-platform/
+├── backend/
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── src/
+│       ├── auth.ts
+│       ├── db.ts
+│       └── server.ts
+├── frontend/
+│   ├── package.json
+│   ├── pnpm-lock.yaml
+│   ├── next.config.mjs
+│   ├── postcss.config.mjs
+│   ├── components.json
+│   ├── app/
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   ├── auth/
+│   │   ├── doctor/
+│   │   └── patient/
+│   ├── components/
+│   │   ├── doctor/
+│   │   └── ui/
+│   ├── lib/
+│   │   ├── drugInteractions.ts
+│   │   ├── syntheticData.ts
+│   │   ├── useAuth.ts
+│   │   └── utils.ts
+│   └── public/
+├── AUTHENTICATION_GUIDE.md
+├── AUTH_SETUP.txt
+├── AUTH_SYSTEM.md
+├── PROJECT_SUMMARY.md
+├── QUICKSTART.md
+├── next-env.d.ts
+└── .env
 ```
 
 ## Doctor Dashboard Features
@@ -147,17 +167,26 @@ Current medications with:
 
 ## Getting Started
 
-### 1. Install Dependencies
+### 1. Install Frontend Dependencies
 ```bash
+cd frontend
 pnpm install
 ```
 
-### 2. Run Development Server
+### 2. Run the Frontend
 ```bash
+cd frontend
 pnpm dev
 ```
 
 The app will be available at `http://localhost:3000`
+
+### 3. Run the Backend (optional)
+```bash
+cd backend
+npm install
+npm run dev
+```
 
 ### 3. Try It Out
 
