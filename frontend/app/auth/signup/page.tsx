@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/lib/useAuth';
 
 export default function SignupPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { signup, loading, error } = useAuth();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -14,6 +15,14 @@ export default function SignupPage() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [role, setRole] = useState<'doctor' | 'patient'>('patient');
   const [signupError, setSignupError] = useState('');
+
+  // Get role from query parameter if provided
+  useEffect(() => {
+    const roleParam = searchParams.get('role');
+    if (roleParam === 'doctor' || roleParam === 'patient') {
+      setRole(roleParam);
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
